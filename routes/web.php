@@ -1,43 +1,23 @@
 <?php
 
-use App\Models\Role;
-use App\Models\User;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Middleware\IsLogged;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Str;
 
 Route::get('/', function () {
-    return response()->json([
-        'message' => 'Welcome to the API',
-        'status' => 200,
-    ]);
+    return redirect('/users');
 });
 
-Route::prefix('users')->group(function(){
-    
-    Route::get('/', function (){
-        $users = User::all();
-        return view('users', ['roles' => Role::all(), 'users' => $users]);
+Route::prefix('auth')->group(function (){
+    Route::get('/login', [AuthController::class, 'login']);
+    Route::post('/login', [AuthController::class, 'store']);
+    Route::get('/logout', [AuthController::class, 'logout'])->middleware([IsLogged::class]);
+});
+
+Route::middleware([IsLogged::class])->group(function () {
+    Route::prefix('users')->group(function(){
+        Route::get('/', [DashboardController::class, 'index']);
+        Route::post('/add', [DashboardController::class, 'addUser']);
     });
-
-    Route::post('/add', function (Request $request){
-        
-        $username = $request->input('username');
-        $name = $request->input('name');
-        $password = $request->input('password');
-        $role = $request->input('role');
-
-        $user = new User([
-            'id' => Str::uuid(),
-            'username' => $username,
-            'name' => $name,
-            'password' => $password,
-            'role_id' => $role,
-        ]);
-
-        $user->save();
-
-        return redirect('/users')->with('success', 'User added successfully');
-    });
-
 });

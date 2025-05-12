@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 
@@ -16,6 +17,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             RoleSeeder::class,
+            PermissionSeeder::class,
+            ProcessorsSeeder::class,
+            PermissionRoleSeeder::class,
         ]);
     }
 }

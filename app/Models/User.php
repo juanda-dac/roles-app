@@ -52,6 +52,11 @@ class User extends Authenticatable
         ];
     }
 
+    public static function findByUsername(string $username)
+    {
+        return self::where('username', '=', $username)->first();
+    }
+
     public function role()
     {
         return $this->belongsTo(Role::class);
