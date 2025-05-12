@@ -30,6 +30,13 @@ class DashboardController extends Controller
 
     public function addUser(Request $request)
     {
+        $request->validate([
+            'username' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'password' => 'required|string|min:5',
+            'role' => 'required|exists:roles,id',
+        ]);
+
         $username = $request->input('username');
         $name = $request->input('name');
         $password = $request->input('password');

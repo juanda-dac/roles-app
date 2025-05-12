@@ -20,10 +20,10 @@
     @hasPermissionOnProcess('Usuarios', 'create')
     <div class="border border-gray-300 p-6 bg-white rounded shadow-md w-[30%] mx-auto mt-4">
         @if ($errors->any())
-            <div class="border border-red-300 bg-red-100 p-2 rounded mb-4">
+            <div>
                 <ul>
                     @foreach ($errors->all() as $err)
-                        <li class="text-red-700">{{ $err }}</li>
+                        <li class="border border-red-300 bg-red-100 p-2 rounded mb-1 text-red-700">{{ $err }}</li>
                     @endforeach
                 </ul>
             </div>
@@ -34,17 +34,17 @@
             @csrf
             <div class="flex items-center mb-1 py-2">
                 <label for="username" class="w-[30%]">Usuario:</label>
-                <input type="text" id="username" name="username" required autocomplete="off" class="ml-2 p-2 w-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                <input type="text" id="username" name="username" autocomplete="off" class="ml-2 p-2 w-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300">
             </div>
     
             <div class="flex items-center mb-1 py-2">
                 <label for="name" class="w-[30%]">Nombre:</label>
-                <input type="text" id="name" name="name" required autocomplete="off" class="ml-2 p-2 w-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                <input type="text" id="name" name="name" autocomplete="off" class="ml-2 p-2 w-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300">
             </div>
     
             <div class="flex items-center mb-1 py-2">
                 <label for="password" class="w-[30%]">Contraseña</label>
-                <input type="password" id="password" name="password" required autocomplete="off" class="ml-2 p-2 w-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                <input type="password" id="password" name="password" autocomplete="off" class="ml-2 p-2 w-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300">
             </div>
     
             <div class="flex items-center mb-1 py-2">
