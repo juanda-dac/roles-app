@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Users Management</title>
-    @vite('resources/css/app.css')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
     <header>
@@ -16,6 +16,8 @@
             <a class="text-white underline" href="/auth/logout">Salir</a>
         </div>
     </header>
+
+    <x-modal-permissions />
 
     @hasPermissionOnProcess('Usuarios', 'create')
     <div class="border border-gray-300 p-6 bg-white rounded shadow-md w-[30%] mx-auto mt-4">
@@ -50,9 +52,11 @@
             <div class="flex items-center mb-1 py-2">
                 <label for="role" class="w-[30%]">Rol</label>
                 <select id="role" name="role" class="ml-2 p-2 w-full border border-gray-300 focus:outline-none">
+                        <option value="">Seleccionar Rol</option>
                     @foreach($roles as $role)
                         <option value="{{ $role->id }}">{{ strtoupper($role->name) }}</option>
                     @endforeach
+                        <option value="create-role" id="create-new-role">[+] Crear Rol</option>
                 </select>
             </div>
             
